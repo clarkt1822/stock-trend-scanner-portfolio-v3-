@@ -1,0 +1,38 @@
+universe_default: sp500   # sp500 | nasdaq100 | path to CSV under universes/
+premarket_window:
+  start: "04:00"
+  end: "09:29"
+filters:
+  min_price: 3
+  max_price: 1500
+  min_avg_dollar_vol: 1_000_000   # was 5,000,000
+indicators:
+  rsi_period: 14
+  atr_period: 14
+  ma_periods: [20, 50, 200]
+scoring:
+  top_n: 100
+  bullish_only: true
+  enable_indecision_filter: false  # was true
+  include_low_signal: true         # include rows even if score <= 0
+  low_signal_limit: 30             # at most this many low-signal rows
+  weights:
+    hammer: 2
+    inverted_hammer: 2
+    bullish_engulfing: 3
+    morning_star: 3
+    harami_bull: 2
+    three_white_soldiers: 3
+    uptrend_ma_stack: 2
+    uptrend_hh_hl: 2
+    vwap_reclaim_pre: 0      # was 2; set 0 by default to avoid premarket empties
+    gap_up: 0                # was 1; set 0 by default to avoid premarket empties
+    volume_confirm: 1        # min mult is relaxed in code to 1.0
+    # negative (if bullish_only is false)
+    shooting_star: -2
+    bearish_engulfing: -3
+    evening_star: -3
+    harami_bear: -2
+    three_black_crows: -3
+output:
+  csv_path: "watchlist_{date}.csv"
