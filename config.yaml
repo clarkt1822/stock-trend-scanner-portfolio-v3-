@@ -1,4 +1,4 @@
-universe_default: sp500   # sp500 | nasdaq100 | path to CSV under universes/
+universe_default: demo_sample.csv   # sp500 | nasdaq100 | path to CSV under universes/
 premarket_window:
   start: "04:00"
   end: "09:29"
